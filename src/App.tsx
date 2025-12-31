@@ -41,6 +41,11 @@ function App() {
     window.open(url, '_blank');
   };
 
+  // Set document title
+  React.useEffect(() => {
+    document.title = "New Year Resolutions";
+  }, []);
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-background p-4 pattern-paper overflow-hidden relative">
 
@@ -52,7 +57,8 @@ function App() {
       <TransparentImage
         src="/sun.png"
         alt="Sun"
-        className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[300px] md:w-[400px] lg:w-[600px] opacity-90 z-0 pointer-events-none mix-blend-multiply translate-y-1/2 drop-shadow-[0_0_80px_rgba(255,170,50,0.9)]"
+        className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[300px] md:w-[400px] lg:w-[600px] opacity-90 z-0 pointer-events-none mix-blend-multiply translate-y-1/2"
+        style={{ filter: "drop-shadow(0 0 80px rgba(255, 170, 50, 0.9))" }}
       />
 
       {/* Randomized Clouds */}
