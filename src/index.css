@@ -1,6 +1,19 @@
 @import "tailwindcss";
 
-@theme {
+@theme static {
+    --font-sans: 'Zen Maru Gothic', sans-serif;
+    --animate-cloud-move: cloud-move 60s linear infinite;
+
+    @keyframes cloud-move {
+        0% {
+            transform: translateX(-100%);
+        }
+
+        100% {
+            transform: translateX(100vw);
+        }
+    }
+
     /* Colors */
     --color-border: hsl(var(--border));
     --color-input: hsl(var(--input));

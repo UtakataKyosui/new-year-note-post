@@ -34,7 +34,7 @@ function App() {
       return;
     }
 
-    const text = `新年あけましておめでとうございます！\n\n今年の抱負: ${goal}\n\n#HappyNewYear2025 #Misskey`;
+    const text = `新年あけましておめでとうございます！\n\n今年の抱負: ${goal}\n\n#HappyNewYear2026 #Misskey`;
     const cleanServer = server.replace(/^https?:\/\//, '').replace(/\/$/, '');
     const url = `https://${cleanServer}/share?text=${encodeURIComponent(text)}`;
 
@@ -57,18 +57,24 @@ function App() {
 
       {/* Randomized Clouds */}
       {[...Array(6)].map((_, i) => (
-        <TransparentImage
+        <div
           key={i}
-          src={i % 2 === 0 ? "/cloud1.png" : "/cloud2.png"}
-          alt="Cloud"
-          className="fixed z-0 pointer-events-none opacity-60 mix-blend-multiply"
+          className="fixed left-0 z-0 pointer-events-none opacity-60 mix-blend-multiply animate-cloud-move"
           style={{
             top: `${Math.random() * 40}%`,
-            left: `${Math.random() * 80 + 10}%`,
-            width: `${Math.random() * 150 + 100}px`,
-            transform: `scale(${Math.random() > 0.5 ? 1 : -1}, 1)`,
+            animationDelay: `${Math.random() * -60}s`,
+            animationDuration: `${40 + Math.random() * 40}s`,
           }}
-        />
+        >
+          <TransparentImage
+            src={i % 2 === 0 ? "/cloud1.png" : "/cloud2.png"}
+            alt="Cloud"
+            style={{
+              width: `${Math.random() * 150 + 100}px`,
+              transform: `scale(${Math.random() > 0.5 ? 1 : -1}, 1)`,
+            }}
+          />
+        </div>
       ))}
 
       {/* Kadomatsu Illustrations */}
@@ -110,7 +116,7 @@ function App() {
 
           <CardTitle className="text-3xl font-bold text-primary tracking-wide">謹賀新年</CardTitle>
           <CardDescription className="text-lg font-medium text-secondary">
-            Happy New Year 2025
+            Happy New Year 2026
           </CardDescription>
         </CardHeader>
 
@@ -153,7 +159,7 @@ function App() {
       </Card>
 
       <div className="fixed bottom-4 text-center w-full text-xs text-muted-foreground pointer-events-none z-20">
-        &copy; 2025 New Year Goals
+        &copy; 2026 New Year Goals
       </div>
     </div>
   );
