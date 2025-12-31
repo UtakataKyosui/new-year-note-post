@@ -1,14 +1,32 @@
 import React, { useState } from 'react';
 import { Send, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { cn } from "@/lib/utils";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 
+
+import TransparentImage from '@/components/TransparentImage';
+
 function App() {
   const [goal, setGoal] = useState('');
   const [server, setServer] = useState('');
+  const [debouncedServer, setDebouncedServer] = useState('');
+
+  // Debounce server input to fetch icon
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedServer(server);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [server]);
+
+  // Determine icon URL
+  const serverIconUrl = debouncedServer
+    ? `https://www.google.com/s2/favicons?domain=${debouncedServer.replace(/^https?:\/\//, '').replace(/\/$/, '')}&sz=128`
+    : null;
 
   const handleShare = () => {
     if (!server) {
@@ -24,29 +42,56 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-background p-4 pattern-paper">
+    <div className="min-h-screen w-full flex items-center justify-center bg-background p-4 pattern-paper overflow-hidden relative">
 
       {/* Decorative Elements */}
       <div className="fixed top-0 left-0 w-full h-2 bg-primary z-50"></div>
-      <div className="fixed bottom-0 left-0 w-full h-2 bg-secondary z-50"></div>
+      <div className="fixed bottom-0 left-0 w-full h-2 bg-primary z-50"></div>
 
-      <Card className="w-full max-w-lg shadow-xl border-secondary/20 relative overflow-hidden backdrop-blur-sm bg-card/95">
+      {/* Kadomatsu Illustrations */}
+      <TransparentImage
+        src="/kadomatsu_left.png"
+        alt="Kadomatsu Left"
+        className="fixed bottom-0 left-0 w-32 md:w-48 lg:w-64 z-0 pointer-events-none drop-shadow-xl"
+      />
+      <TransparentImage
+        src="/kadomatsu_right.png"
+        alt="Kadomatsu Right"
+        className="fixed bottom-0 right-0 w-32 md:w-48 lg:w-64 z-0 pointer-events-none drop-shadow-xl"
+      />
+
+      <Card className="w-full max-w-lg shadow-xl border-secondary/20 relative overflow-visible backdrop-blur-sm bg-card/95 z-10">
 
         {/* Decorative Circle/Sun */}
-        <div className="absolute -right-20 -top-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute -left-20 -bottom-20 w-40 h-40 bg-secondary/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute -right-20 -top-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl pointer-events-none overflow-hidden"></div>
+        <div className="absolute -left-20 -bottom-20 w-40 h-40 bg-secondary/10 rounded-full blur-3xl pointer-events-none overflow-hidden"></div>
 
-        <CardHeader className="text-center space-y-2 pb-2">
-          <div className="mx-auto bg-primary/10 w-12 h-12 rounded-full flex items-center justify-center mb-2">
-            <Sparkles className="text-primary w-6 h-6" />
+        <CardHeader className="text-center space-y-2 pb-2 relative">
+          {/* Server Icon "Between Decorations" (Top Center of Card) */}
+          <div className="mx-auto w-20 h-20 rounded-full flex items-center justify-center mb-4 relative bg-background border-4 border-secondary shadow-lg transition-all duration-500 ease-in-out">
+            {serverIconUrl ? (
+              <img
+                src={serverIconUrl}
+                alt="Server Icon"
+                className="w-full h-full object-cover rounded-full p-0.5"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                }}
+              />
+            ) : null}
+            <Sparkles className={cn("text-primary w-10 h-10 absolute transition-opacity duration-300", serverIconUrl ? "hidden opacity-0" : "opacity-100")} />
+            {/* Fallback for error */}
+            <Sparkles className="text-primary w-10 h-10 absolute hidden" />
           </div>
+
           <CardTitle className="text-3xl font-bold text-primary tracking-wide">謹賀新年</CardTitle>
           <CardDescription className="text-lg font-medium text-secondary">
             Happy New Year 2025
           </CardDescription>
         </CardHeader>
 
-        <CardContent className="space-y-6 pt-6">
+        <CardContent className="space-y-6 pt-2">
           <div className="space-y-2">
             <Label htmlFor="goal" className="text-base">今年の抱負</Label>
             <Textarea
@@ -84,7 +129,7 @@ function App() {
         </CardFooter>
       </Card>
 
-      <div className="fixed bottom-4 text-center w-full text-xs text-muted-foreground pointer-events-none">
+      <div className="fixed bottom-4 text-center w-full text-xs text-muted-foreground pointer-events-none z-20">
         &copy; 2025 New Year Goals
       </div>
     </div>
