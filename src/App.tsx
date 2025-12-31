@@ -48,16 +48,23 @@ function App() {
       <div className="fixed top-0 left-0 w-full h-2 bg-primary z-50"></div>
       <div className="fixed bottom-0 left-0 w-full h-2 bg-primary z-50"></div>
 
+      {/* First Sunrise Background - Top Center */}
+      <TransparentImage
+        src="/first_sunrise.png"
+        alt="First Sunrise"
+        className="fixed top-10 left-1/2 transform -translate-x-1/2 w-[800px] max-w-full opacity-60 z-0 pointer-events-none mix-blend-multiply"
+      />
+
       {/* Kadomatsu Illustrations */}
       <TransparentImage
         src="/kadomatsu_left.png"
         alt="Kadomatsu Left"
-        className="fixed bottom-0 left-0 w-48 md:w-64 lg:w-96 z-0 pointer-events-none drop-shadow-xl"
+        className="fixed bottom-0 left-0 w-48 md:w-64 lg:w-96 z-10 pointer-events-none drop-shadow-xl"
       />
       <TransparentImage
         src="/kadomatsu_left.png"
         alt="Kadomatsu Right"
-        className="fixed bottom-0 right-0 w-48 md:w-64 lg:w-96 z-0 pointer-events-none drop-shadow-xl scale-x-[-1]"
+        className="fixed bottom-0 right-0 w-48 md:w-64 lg:w-96 z-10 pointer-events-none drop-shadow-xl scale-x-[-1]"
       />
 
       <Card className="w-full max-w-lg shadow-xl border-secondary/20 relative overflow-visible backdrop-blur-sm bg-card/95 z-10">
