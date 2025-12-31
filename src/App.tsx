@@ -52,7 +52,7 @@ function App() {
       <TransparentImage
         src="/sun.png"
         alt="Sun"
-        className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[300px] md:w-[400px] lg:w-[600px] opacity-80 z-0 pointer-events-none mix-blend-multiply translate-y-1/4"
+        className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[300px] md:w-[400px] lg:w-[600px] opacity-90 z-0 pointer-events-none mix-blend-multiply translate-y-1/2 drop-shadow-[0_0_60px_rgba(255,100,50,0.8)]"
       />
 
       {/* Randomized Clouds */}
