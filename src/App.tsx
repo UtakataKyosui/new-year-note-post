@@ -48,12 +48,28 @@ function App() {
       <div className="fixed top-0 left-0 w-full h-2 bg-primary z-50"></div>
       <div className="fixed bottom-0 left-0 w-full h-2 bg-primary z-50"></div>
 
-      {/* First Sunrise Background - Top Center */}
+      {/* First Sunrise Background - Sun */}
       <TransparentImage
-        src="/first_sunrise.png"
-        alt="First Sunrise"
-        className="fixed top-10 left-1/2 transform -translate-x-1/2 w-[800px] max-w-full opacity-60 z-0 pointer-events-none mix-blend-multiply"
+        src="/sun.png"
+        alt="Sun"
+        className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[300px] md:w-[400px] lg:w-[600px] opacity-80 z-0 pointer-events-none mix-blend-multiply translate-y-1/4"
       />
+
+      {/* Randomized Clouds */}
+      {[...Array(6)].map((_, i) => (
+        <TransparentImage
+          key={i}
+          src={i % 2 === 0 ? "/cloud1.png" : "/cloud2.png"}
+          alt="Cloud"
+          className="fixed z-0 pointer-events-none opacity-60 mix-blend-multiply"
+          style={{
+            top: `${Math.random() * 40}%`,
+            left: `${Math.random() * 80 + 10}%`,
+            width: `${Math.random() * 150 + 100}px`,
+            transform: `scale(${Math.random() > 0.5 ? 1 : -1}, 1)`,
+          }}
+        />
+      ))}
 
       {/* Kadomatsu Illustrations */}
       <TransparentImage
