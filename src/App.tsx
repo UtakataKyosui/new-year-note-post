@@ -52,12 +52,12 @@ function App() {
       <TransparentImage
         src="/kadomatsu_left.png"
         alt="Kadomatsu Left"
-        className="fixed bottom-0 left-0 w-32 md:w-48 lg:w-64 z-0 pointer-events-none drop-shadow-xl"
+        className="fixed bottom-0 left-0 w-48 md:w-64 lg:w-96 z-0 pointer-events-none drop-shadow-xl"
       />
       <TransparentImage
-        src="/kadomatsu_right.png"
+        src="/kadomatsu_left.png"
         alt="Kadomatsu Right"
-        className="fixed bottom-0 right-0 w-32 md:w-48 lg:w-64 z-0 pointer-events-none drop-shadow-xl"
+        className="fixed bottom-0 right-0 w-48 md:w-64 lg:w-96 z-0 pointer-events-none drop-shadow-xl scale-x-[-1]"
       />
 
       <Card className="w-full max-w-lg shadow-xl border-secondary/20 relative overflow-visible backdrop-blur-sm bg-card/95 z-10">
